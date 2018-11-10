@@ -5,3 +5,7 @@ app = Flask(__name__)
 def hello_world():
     return render_template("base.html")
 
+
+@app.route('/home')
+def home():
+    return render_template("home.html")
