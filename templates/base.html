@@ -10,7 +10,7 @@
   
     <title>Study Buddy</title>
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,35 +32,9 @@
   </head>
 
   <body>
-    <style>
-    .sidenav 
-    {
-        height: 100%; /* Full-height: remove this if you want "auto" height */
-        width: 10%; /* Set the width of the sidebar */
-        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-        z-index: 1; /* Stay on top */
-        top: 100; /* Stay at the top */
-        left: 0;
-        background-color: #343a40; /* Black */
-        overflow-x: hidden; /* Disable horizontal scroll */
-        padding-top: 20px;
-    }
-    .sidenav a 
-    {
-      padding: 6px 8px 6px 16px;
-      text-decoration: none;
-      font-size: 25px;
-      color: #818181;
-      display: block;
-    }
-    </style>
-    <div class="sidenav">
-      <a href="#">Test</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
-    </div>
       {% block body %}
+
+      {{ name }}
 
       {% endblock %}
   </body>
