@@ -134,4 +134,10 @@ dmypy.json
 pyvenv.cfg
 pip-selfcheck.json
 
+# Workspace setting
+.vscode/
+.idea/
+
 # End of https://www.gitignore.io/api/flask,venv
+
+
