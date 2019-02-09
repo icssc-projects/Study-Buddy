@@ -1,7 +1,19 @@
 {% extends "base.html" %}
 
 {% block body %}
-
-	{{ users }}
-
+	<div class = "container">
+		{% for post in posts %}
+		<br>
+		<div class="card">
+		  <div class="card-header">
+		    {{ post[5] }}
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title">{{ post[3] }}</h5>
+		    <p class="card-text">{{ post[4] }}</p>
+		    <a href="#" class="btn btn-primary">Comment</a>
+		  </div>
+		</div>
+		{% endfor %}
+	</div>
 {% endblock %}

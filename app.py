@@ -1,5 +1,16 @@
 from flask import Flask, render_template, url_for
 from connection import connect
+from flask_sqlalchemy import SQLAlchemy
+from db import db
+from User import User
+from Post import Post
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://fVb9YnCgUU:L7AZ3KCccR@remotemysql.com/fVb9YnCgUU'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -42,7 +53,8 @@ def posts():
         cursor, connection = connect()
         cursor.execute("""select * from Post""")
         posts = cursor.fetchall()
-        return render_template("posts.html", posts = str(posts))
+        #posts = Post.query.order_by(Post.post_id).all()
+        return render_template("posts.html", posts = posts)
     except Exception as e:
         return str(e)
 
