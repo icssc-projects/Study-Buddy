@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
+	<p> Debugging: {{ size }} posts made </p>
 	<div class = "container">
 		{% for post in posts %}
 		<br>
@@ -16,4 +17,5 @@
 		</div>
 		{% endfor %}
 	</div>
+	<br>
 {% endblock %}

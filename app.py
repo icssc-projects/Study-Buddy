@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from connection import connect
 from flask_sqlalchemy import SQLAlchemy
 from db import db
@@ -43,7 +43,8 @@ def createAccount():
         ## Set session variable to logged_in = True, username = ****, uid - ###
         ## Use these values throughout the session
         ## Session variables can be accessed in HTML files without passing them
-        return render_template("create-user.html")
+
+        return render_template("create-account.html")
     except Exception as e:
         return str(e)
 
@@ -53,16 +54,38 @@ def posts():
         cursor, connection = connect()
         cursor.execute("""select * from Post""")
         posts = cursor.fetchall()
+        connection.close()
+        cursor.close()
         #posts = Post.query.order_by(Post.post_id).all()
-        return render_template("posts.html", posts = posts)
+        return render_template("posts.html", posts = posts, size = len(posts))
     except Exception as e:
         return str(e)
 
-@app.route('/create-post')
+# INSERT INTO `Post` (`post_id`, `user_id`, `username`, `title`, `text`, `course`) 
+# VALUES (NULL, '1', 'wrcastel', 'Looking for a buddy', 'Does anybody want to study at Ayala tonight at 4pm?', 'CS143B')
+
+
+@app.route('/create-post',  methods = ['GET', 'POST'])
 def createPost():
     try:
         ## Use the cursor to insert into Post
         ## Make sure to insert the current session's username and uid
+        if request.method == "POST":
+            title = request.form['title']
+            text = request.form['text']
+            course = request.form['course']
+            #return str([title, text, course])
+
+            # These lines need to be replaced based on the user current logged in session
+            username = "wrcastel"
+            user_id = 1
+            ##############
+            cursor, connection = connect()
+            cursor.execute('insert into Post(user_id, username, title, text, course)\
+                            values("%d", "%s", "%s", "%s", "%s")' \
+                            % (1, "wrcastel", title, text, course))
+            connection.commit()
+            return redirect(url_for('posts'))
         return render_template("create-post.html")
     except Exception as e:
         return str(e)
