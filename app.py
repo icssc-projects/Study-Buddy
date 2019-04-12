@@ -34,6 +34,11 @@ def users():
         ### If an error occurs, this will return the error as a string
         return str(e)
 
+@app.route('/courses')
+def courses():
+    return render_template("courses.html")
+
+
 
 
 @app.route('/create-account')
